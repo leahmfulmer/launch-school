@@ -1,0 +1,5 @@
+age = 29
+num_years = 10
+
+print(f"You are {age} years old.")
+print(f"In {num_years} years, you will be {age + num_years} years old.")
