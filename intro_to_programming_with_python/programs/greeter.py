@@ -1,5 +1,4 @@
-name = "Victor"
+first = input("What is your first name? ")
+last = input("What is your last name? ")
 
-print(f'Good Morning, {name}.')
-print(f'Good Afternoon, {name}.')
-print(f'Good Evening, {name}.')
+print(f'Hello, {first} {last}!')
