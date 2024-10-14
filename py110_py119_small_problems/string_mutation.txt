@@ -1,0 +1,39 @@
+Copied from  https://stackoverflow.com/questions/9453820/alternative-to-python-string-item-assignment
+
+Strings are immutable. That means you can't assign to them at all. You could use formatting:
+
+>>> s = 'abc{0}efg'.format('d')
+>>> s
+'abcdefg'
+
+Or concatenation:
+
+>>> s = 'abc' + 'd' + 'efg'
+>>> s
+'abcdefg'
+
+Or replacement (thanks Odomontois for reminding me):
+
+>>> s = 'abc0efg'
+>>> s.replace('0', 'd')
+'abcdefg'
+
+But keep in mind that all of these methods create copies of the string, rather than modifying it in-place. If you want in-place modification, you could use a bytearray -- though that will only work for plain ascii strings, as alexis points out.
+
+>>> b = bytearray('abc0efg')
+>>> b[3] = 'd'
+>>> b
+bytearray(b'abcdefg')
+
+Or you could create a list of characters and manipulate that. This is probably the most efficient and correct way to do frequent, large-scale string manipulation:
+
+>>> l = list('abc0efg')
+>>> l[3] = 'd'
+>>> l
+['a', 'b', 'c', 'd', 'e', 'f', 'g']
+>>> ''.join(l)
+'abcdefg'
+
+And consider the re module for more complex operations.
+
+String formatting and list manipulation are the two methods that are most likely to be correct and efficient IMO -- string formatting when only a few insertions are required, and list manipulation when you need to frequently update your string.
