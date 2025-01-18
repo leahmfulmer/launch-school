@@ -73,7 +73,7 @@ print(f'{my_number:,}')    # 1,234.5678
 print(f'{my_number:_}')    # 1_234.5678
 ```
 
-### string methods
+### string methods<br>`CONFIDENT`
 As immutable objects, strings cannot be mutated under any circumstances. However, string methods can be performed on strings, returning a new string object with the intended modifications.<br><br>
 
 #### `str.capitalize()`
@@ -128,7 +128,7 @@ my_string.replace('c', 'h')    # 'hat'
 ```
 
 #### `str.split('character')`
-Returns a list of the words in `str`, using spaces (default) as an indicator of a new word, or a given character.
+Returns a list of the words in `str`, using spaces as an indicator of a new word, or a given character.
 ```Python
 my_string = 'I love you'
 print(my_string.split())            # ['I', 'love', 'you']
@@ -137,13 +137,13 @@ my_next_string = 'I + love + you'
 print(my_next_string.split('+'))    # ['I ', ' love ', ' you']
 ```
 
-#### `str.find('character_or_string')`
-Returns the first index at which the given character or string is found within `str`.<br><br>
+#### `str.find('string')`
+Returns the first index at which the given substring is found within `str`, searching from left to right.<br><br>
 
-#### `str.rfind('character_or_string')`
-Returns the first index at which the given character or string is found within `str`, searching from right to left. *Note:* This method returns the left-to-right index of `str`, even though it searches for the given input from right to left.<br><br>
+#### `str.rfind('string')`
+Returns the first index at which the given substring is found within `str`, searching from right to left. *Note:* This method returns the left-to-right index of `str`, even though it searches for the given input from right to left.<br><br>
 
-#### boolean vs. truthiness
+#### boolean vs. truthiness<br>`TRY AGAIN`
 Booleans are immutable, primitive objects representing binary states. There are two boolean values: `True` and `False`. They often appear as the return value of methods or logical / comparison operations. In mathematical expressions, `True` evaluates to `1` and `False` evaluates to `0`.
 
 Truthiness is a way of describing how a value behaves in a Boolean context. When an object contains a non-zero or non-empty value, we say that that value "is truthy" or "evaluates to true". When the object contains a zero, empty, or `None` value, we say that that value "is falsy" or "evaluates to false". Examples of falsy values include:
@@ -153,10 +153,10 @@ Truthiness is a way of describing how a value behaves in a Boolean context. When
 * any custom data types defined as falsy<br><br>
 
 
-#### `None`
+#### `None`<br>`ALMOST THERE`
 `None` is an immutable data type used to describe an object with an absent value. The default return value for custom functions, as well as many methods that mutate mutable objects is `None`. Launch School is inconclusive about whether `None` is a primitive or non-primitive data type.<br><br>
 
-#### ranges
+#### ranges<br>`CONFIDENT`
 Ranges are immutable, non-primitive sequences that increment integer values from one endpoint to another. Ranges are "lazy sequences" meaning that they do not create element values until they are called, usually by iterating them in a `for` loop or coercing them into another data type,. Their syntax is `range(inclusive_starting_integer, exclusive_ending_integer, step_size)`. Make a decending range by inputing a negative step size and a startpoint greater than the endpoint. If the step size is negative and the startpoint is less than the endpoint, or if the startpoint is equal to the endpoint no matter the step size, Python will return an empty range.
 ```Python
 print(range(2, 25, 4))            # range(2, 25, 4)
@@ -170,4 +170,105 @@ print(list(range(10, 10, -1)))    # []
 ```
 
 #### list and dictionary syntax
+Lists are mutable, non-primitive sequnces defined by square brackets `[]`. Their elements are comma-delimited, ordered, and heterogenous (i.e. any list element can be of any data type). One may retrieve and reasign elements from a list by indexing:
+
+```Python
+my_list = [True, 2, '3']
+print(my_list[0])           # True
+
+my_list[0] = {True: 1}
+print(my_list)              # [{True: 1}, 2, '3']
+```
+
+Dictionaries are mutable, non-primitive mappings (or collection of key-value pairs) defined by curly brackets `{}`. Their elements are comma-delimited key-value pairs wherein each pair is separated by a colon. Dictionaries are unordered, so their values are accessed by their respective keys rather than indices. Dictionary values are heterogenous and their keys may be heterogenous, too, but their keys must be hashable. For our purposes, we just need to know that immutable objects are hashable. One may retrieve and reassign elements through key-based access:
+
+```Python
+my_dict = {
+    True: 'I love you!',
+    2: {'Krishna': 'Radha'},
+    '3': ['rajas', 'tamas', 'sattva']
+}
+print(my_dict[True])                       # I love you!
+
+my_dict[True] = 'I love you very much!'
+print(my_dict)               
+
+# {
+# True: 'I love you very much!', 
+# 2: {'Krishna': 'Radha'}, 
+# '3': ['rajas', 'tamas', 'sattva']
+# }
+
+```
+
+#### list methods
+
+#### `len(list)`
+Returns an integer whose value is the number of elements in `list`.
+
+#### `list.append(element_to_add)`
+Mutates `list` by adding `element_to_add` to the end of `list`; returns `None`.
+
+```Python
+my_list = [1, 2, 3]
+append_return_value = my_list.append(4)
+
+print(append_return_value)    # None
+print(my_list)                # [1, 2, 3, 4]
+```
+
+#### `list.pop(index_to_remove)`
+Mutates `list` by removing the element at index `index_to_remove`; returns the popped element. If no element is given, removes the last element.
+
+```python
+my_list = ['a', 'b', 'c', 'd']
+pop_return_value = my_list.pop()
+
+print(pop_return_value)    # d
+print(my_list)             # ['a', 'b', 'c']
+
+print(my_list.pop(0))      # a
+print(my_list)             # ['b', 'c']
+```
+
+#### `list.reverse()`
+Mutates `list` by reversing the order of all elements; returns `None`.
+
+```python
+my_list = [1, 2, 3, 4, 5]
+reverse_return_value = my_list.reverse()
+
+print(reverse_return_value)    # None
+print(my_list)                 # [5, 4, 3, 2, 1]
+```
+
+### dictionary methods
+
+#### `dict.keys()`
+Returns a view object of the keys in `dict`; this object is tied to the keys in the dictionary it references and will reflect any mutations to those keys.
+
+#### `dict.values()`
+Returns a view object of the values in `dict`; this object is tied to the values in the dictionary it references and will reflect any mutations to those values.
+
+#### `dict.items()`
+Returns a view object of the `(key, value)` tuples in `dict`; this object is tied to the `(key, value)` tuples in the dictionary it references and will reflect any mutations to those elements.
+
+#### `dict.get('desired_key', 'alternative_output')`
+Returns the value in `dict` associated with the `desired_key`, or if the `desired_key` is not present, returns the `alternative_output`.
+
+```python
+my_dict = {
+    True: 'I love you!',
+    2: {'Krishna': 'Radha'},
+    '3': ['rajas', 'tamas', 'sattva'],
+}
+
+get = True
+get_return_value = my_dict.get(get, f'No element {get}.')
+print(get_return_value)    # I love you!
+
+get = False
+get_return_value = my_dict.get(get, f'No element {get}.')
+print(get_return_value)    # No element False.
+```
 
