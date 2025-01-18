@@ -201,7 +201,7 @@ print(my_dict)
 
 ```
 
-#### list methods
+### list methods
 
 #### `len(list)`
 Returns an integer whose value is the number of elements in `list`.
@@ -272,3 +272,95 @@ get_return_value = my_dict.get(get, f'No element {get}.')
 print(get_return_value)    # No element False.
 ```
 
+### slicing (strings, lists, tuples)
+Slicing returns a portion of a given object as a new object. It uses the syntax `my_object[inclusive_start_index, exclusive_stop_index, step_size]`. One creates a reversed copy of a list by calling `my_object[::-1]`.
+
+```python
+my_tuple = (1, 2, 3, 4)
+slicing_return_value = my_tuple[::-1]
+
+print(slicing_return_value)    # (4, 3, 2, 1)
+print(my_tuple)                # (1, 2, 3, 4)
+```
+
+### operators
+
+#### arithmetic: `+`, `-`, `*`, `/`, `//`, `%`, `**`
+Arithmetic operators perform mathematical functions on Python's numeric values. Specifically... 
+* Division (`/`) performs float division; the result is always a float regardless of the operand data types. 
+* Integer division (`//`) returns the largest whole number less than or equal to the floating point result; the resulting data type depends on those of the operands. 
+* Modulo (`%`) returns the remainder of a division operation; the resulting data type depends on those of the operands. 
+* Exponentiation (`**`) performs an operation of the first operand raised to the power of the second operand; the resulting data type depends on those of the operands.
+
+
+#### string operators: `+`
+Strings may be concatenated using the `+` operator.
+
+```python
+string1 = "I love you"
+string2 = " so much!"
+print(string1 + string2)    # I love you so much!
+```
+
+#### list operators: `+`
+List may be concatenated using the `+` operator.
+
+```python
+list1 = ['I', 'love', 'you']
+list2 = [4, 'ever']
+print(list1 + list2)    # ['I', 'love', 'you', 4, 'ever']
+```
+
+#### comparison: `==`, `!=`, `<`, `>`, `<=`, `>=`
+Comparison operations return a Boolean value that evaluates whether the comparison between their operands is `True` or `False`. *Note:* The equality operator `==` evaluates the equality of element values, not the identities of objects in memory. It returns `True` if its operands have equal values and `False` if its operands have unequal values.
+
+```python
+# not equal to
+print('4' != 4)     # True
+print('a' < 'c')    # True
+print('Z' < 'a')    # True
+
+# integers in the range (-5, 256) inclusive
+# are given a specific location in memory
+low1, high1 = -5, 256
+low2, high2 = -5, 256
+
+print(low1 == low2, high1 == high2)    # True True
+print(low1 is low2, high1 is high2)    # True True
+
+# integers outside of this range create a 
+# new memory object when they are assigned
+low3, high3 = -6, 257
+low4, high4 = -6, 257
+
+print(low3 == low4, high3 == high4)    # True True
+print(low3 is low4, high3 is high4)    # False False
+```
+
+#### logical: `and`, `or`, `not`
+Logical operators evaluate the truthiness of their operands and return either the last evaluated element (`and`, `or`) or a Boolean value (`not`).
+
+```python
+print({} and [])            # {}
+print({} or [])             # []
+print(not "")               # True
+print(not "I love you!")    # False
+```
+
+*Note:* The operator precedence of comparison and logical operators is...
+
+* left-to-right
+* comparison (`==`, `!=`, `<`, `>`, `<=`, `>=`)
+* `not`
+* `and`
+* `or`
+
+```python
+print(0 or 2 >= 1.5 and 'c' > 'a')
+```
+
+#### identity: `is`, `is not` 
+
+*Note:* The identi
+
+#### operator precedence
