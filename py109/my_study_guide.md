@@ -169,7 +169,7 @@ print(range(10, 10, -1))          # range(10, 10, -1)
 print(list(range(10, 10, -1)))    # []
 ```
 
-#### list and dictionary syntax
+#### list and dictionary syntax<br>`CONDFIDENT`
 Lists are mutable, non-primitive sequnces defined by square brackets `[]`. Their elements are comma-delimited, ordered, and heterogenous (i.e. any list element can be of any data type). One may retrieve and reasign elements from a list by indexing:
 
 ```Python
@@ -198,10 +198,9 @@ print(my_dict)
 # 2: {'Krishna': 'Radha'}, 
 # '3': ['rajas', 'tamas', 'sattva']
 # }
-
 ```
 
-### list methods
+### list methods<br>`MOSTLY THERE`
 
 #### `len(list)`
 Returns an integer whose value is the number of elements in `list`.
@@ -242,7 +241,7 @@ print(reverse_return_value)    # None
 print(my_list)                 # [5, 4, 3, 2, 1]
 ```
 
-### dictionary methods
+### dictionary methods<br>`CONDFIDENT`
 
 #### `dict.keys()`
 Returns a view object of the keys in `dict`; this object is tied to the keys in the dictionary it references and will reflect any mutations to those keys.
@@ -272,7 +271,7 @@ get_return_value = my_dict.get(get, f'No element {get}.')
 print(get_return_value)    # No element False.
 ```
 
-### slicing (strings, lists, tuples)
+### slicing (strings, lists, tuples)<br>`MOSTLY THERE`
 Slicing returns a portion of a given object as a new object. It uses the syntax `my_object[inclusive_start_index, exclusive_stop_index, step_size]`. One creates a reversed copy of a list by calling `my_object[::-1]`.
 
 ```python
@@ -283,7 +282,7 @@ print(slicing_return_value)    # (4, 3, 2, 1)
 print(my_tuple)                # (1, 2, 3, 4)
 ```
 
-### operators
+### operators<br>`CONDFIDENT`
 
 #### arithmetic: `+`, `-`, `*`, `/`, `//`, `%`, `**`
 Arithmetic operators perform mathematical functions on Python's numeric values. Specifically... 
@@ -293,7 +292,7 @@ Arithmetic operators perform mathematical functions on Python's numeric values. 
 * Exponentiation (`**`) performs an operation of the first operand raised to the power of the second operand; the resulting data type depends on those of the operands.
 
 
-#### string operators: `+`
+#### string operators: `+`<br>`CONDFIDENT`
 Strings may be concatenated using the `+` operator.
 
 ```python
@@ -302,7 +301,7 @@ string2 = " so much!"
 print(string1 + string2)    # I love you so much!
 ```
 
-#### list operators: `+`
+#### list operators: `+`<br>`CONDFIDENT`
 List may be concatenated using the `+` operator.
 
 ```python
@@ -312,7 +311,7 @@ print(list1 + list2)    # ['I', 'love', 'you', 4, 'ever']
 ```
 
 #### comparison: `==`, `!=`, `<`, `>`, `<=`, `>=`
-Comparison operations return a Boolean value that evaluates whether the comparison between their operands is `True` or `False`. *Note:* The equality operator `==` evaluates the equality of element values, not the identities of objects in memory. It returns `True` if its operands have equal values and `False` if its operands have unequal values.
+Comparison operations return a Boolean value that evaluates whether the comparison between their operands is `True` or `False`. The equality operator `==` evaluates the equality of element values, not the identities of objects in memory. It returns `True` if its operands have equal values and `False` if its operands have unequal values.
 
 ```python
 # not equal to
@@ -321,7 +320,7 @@ print('a' < 'c')    # True
 print('Z' < 'a')    # True
 
 # integers in the range (-5, 256) inclusive
-# are given a specific location in memory
+# are given a specific locations in memory
 low1, high1 = -5, 256
 low2, high2 = -5, 256
 
@@ -347,20 +346,92 @@ print(not "")               # True
 print(not "I love you!")    # False
 ```
 
-*Note:* The operator precedence of comparison and logical operators is...
+#### identity: `is`, `is not` 
+
+The identity operator evaluates an object's location in memory, not its value. `is` returns `True` if two objects point to the same location in memory and `False` if two objects point to different memory location. The operator `is not` returns the opposite Boolean value of `is`. Use the function `id()` to evaluate an object's location in memory, represented as an integer. When objects share the same location in memory, this is known as aliasing.
+
+Python employs "interning" in order to save memory space and improve performance. Python "interns", or reserves particular locations in memory, for each integer in the range (-5, 256) inclusive as well as some strings:
+
+```python
+# interned strings
+a = 'Leah'
+b = 'Leah'
+c = b
+
+print(a == b)            # True
+print(a is b)            # True
+print(id(a) == id(b))    # True
+
+print(b == c)            # True
+print(b is c)            # True
+print(id(b) == id(c))    # True
+
+
+# non-interned strings
+d = 'Hello, Leah!'
+e = 'Hello, Leah!'
+f = e
+
+print(d == e)            # True
+print(d is e)            # False
+print(id(d) == id(e))    # False
+
+print(e == f)            # True
+print(e is f)            # True
+print(id(e) == id(f))    # True
+```
+
+
+#### operator precedence
+
+Operators with higher precedence are evaluated before operatorss with lower precedence. Operands "bind more tightly" to operators of higher precedence, meaning operands belonging to two operators will evaluate within the context of the higher-precedence operator first.
+
+Short-circuiting is a process by which `and` and `or` operations stop evaluating as soon as their evaluation condition is met; they do not continue to evaluate subsequent operands after the evaluation condition is met.
+
+The operator precedence of comparison and logical operators is...
 
 * left-to-right
 * comparison (`==`, `!=`, `<`, `>`, `<=`, `>=`)
 * `not`
 * `and`
-* `or`
+* `or`<br><br>
+
+Let's see an example...
 
 ```python
+# without short-circuiting
 print(0 or 2 >= 1.5 and 'c' > 'a')
+
+print(0 or ((2 >= 1.5) and ('c' > 'a')))
+print(falsy or ((2 >= 1.5) and ('c' > 'a')))
+print(falsy or (True and ('c' > 'a')))
+print(falsy or (True and True))
+print(falsy or True)
+print(True)    # True
+
+# with short-circuiting
+print(1 or 2 >= 1.5 and 'c' > 'a')
+
+print(1 or ((2 >= 1.5) and ('c' > 'a')))
+print(truthy or ((2 >= 1.5) and ('c' > 'a')))
+print(1)       # 1
 ```
 
-#### identity: `is`, `is not` 
+### mutability and immutability
+Mutability refers to the abilty to mutate an object in memory once it has been created. Mutable objects can be changed "in-place", at their location in memory, after they have been initialized. Mutable objects include lists, dictionaries, sets, and functions. Immutable objects cannot be changed in-place after they have been initialized. Immutable objects include integers, floats, strings, Booleans, ranges, tuples, frozensets, and `None`.
 
-*Note:* The identi
+```python
+# mutability
+my_list = [1, 2, 3]
+print(id(my_list))    # 4415656448
 
-#### operator precedence
+my_list += [4]
+print(id(my_list))    # 4415656448
+
+# immutability
+my_int = 4
+print(id(my_int))     # 4315406592
+
+my_int += 4
+print(id(my_int))     # 4315406720
+```
