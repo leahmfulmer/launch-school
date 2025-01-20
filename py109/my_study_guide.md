@@ -49,6 +49,15 @@ Furthermore, one may represent large floats with scientific notation, but large 
 * `print(float(3e16))` returns `3e16`
 * `print(int(3e16))` returns `30000000000000000`<br><br>
 
+One thing to note is that floating point numbers contain **imprecision**. Floating point numbers are stored in binary format, which cannot precisely represent many decimals using only powers of two. Some values become recurring decimals in binary, and thus cannot be completely represented with limited data storage. This may cause unexpected errors; use `math.isclose()`.
+
+```python
+print(0.1 + 0.2 == 0.3)         # False
+
+import math
+math.isclose(0.1 + 0.2, 0.3)    # True
+```
+
 ### strings<br>`CONFIDENT`
 Strings are immutable, primitive text sequences. They can be represented with single quotes (`'hi'`), double quotes (`"hello"`), or triple single quotes (`'''`) or triple double quotes (`"""`)for multi-line strings. If a quote contains both single and double quotes in its body, you may use triple quotes or escape characters:
 * `'''What d'you mean by "closed"?'''`
@@ -292,8 +301,8 @@ Arithmetic operators perform mathematical functions on Python's numeric values. 
 * Exponentiation (`**`) performs an operation of the first operand raised to the power of the second operand; the resulting data type depends on those of the operands.
 
 
-#### string operators: `+`<br>`CONDFIDENT`
-Strings may be concatenated using the `+` operator.
+#### string operators: `+`
+Strings may be concatenated using the `+` operator. This always returns a new objects, because strings cannot be mutated.
 
 ```python
 string1 = "I love you"
@@ -301,13 +310,29 @@ string2 = " so much!"
 print(string1 + string2)    # I love you so much!
 ```
 
-#### list operators: `+`<br>`CONDFIDENT`
-List may be concatenated using the `+` operator.
+#### list operators: `+`
+List may be concatenated using the `+` operator. This may mutate a list if executed with augmented assignment, or create a new list if executed without augmented assignment.
 
 ```python
 list1 = ['I', 'love', 'you']
+print(list1)        # ['I', 'love', 'you']
+print(id(list1))    # 4574835008
+
 list2 = [4, 'ever']
-print(list1 + list2)    # ['I', 'love', 'you', 4, 'ever']
+print(list2)        # [ 4, 'ever']
+print(id(list2))    # 4636840192
+
+# list concatentation with augmented
+# assignment mutates a list in-place
+list1 += list2
+print(list1)        # ['I', 'love', 'you', 4, 'ever']
+print(id(list1))    # 4574835008
+
+# list concatenation without augmented 
+# assignment creates a new list
+list1 = list1 + list2
+print(list1)        # ['I', 'love', 'you', 4, 'ever', 4, 'ever']
+print(id(list1))    # 4636805248
 ```
 
 #### comparison: `==`, `!=`, `<`, `>`, `<=`, `>=`
@@ -346,7 +371,7 @@ print(not "")               # True
 print(not "I love you!")    # False
 ```
 
-#### identity: `is`, `is not` 
+#### identity: `is`, `is not`
 
 The identity operator evaluates an object's location in memory, not its value. `is` returns `True` if two objects point to the same location in memory and `False` if two objects point to different memory location. The operator `is not` returns the opposite Boolean value of `is`. Use the function `id()` to evaluate an object's location in memory, represented as an integer. When objects share the same location in memory, this is known as aliasing.
 
@@ -382,7 +407,7 @@ print(id(e) == id(f))    # True
 ```
 
 
-#### operator precedence
+#### operator precedence<br>`FILL IN ENTIRE OPERATION PRECEDENCE TABLE`
 
 Operators with higher precedence are evaluated before operatorss with lower precedence. Operands "bind more tightly" to operators of higher precedence, meaning operands belonging to two operators will evaluate within the context of the higher-precedence operator first.
 
@@ -424,16 +449,20 @@ Mutability refers to the abilty to mutate an object in memory once it has been i
 ```python
 # mutability
 my_list = [1, 2, 3]
+print(my_list)        # [1, 2, 3]
 print(id(my_list))    # 4415656448
 
 my_list += [4]
+print(my_list)        # [1, 2, 3, 4]
 print(id(my_list))    # 4415656448
 
 # immutability
 my_int = 4
+print(my_int)         # 4
 print(id(my_int))     # 4315406592
 
 my_int += 4
+print(my_int)         # 8
 print(id(my_int))     # 4315406720
 ```
 
@@ -444,25 +473,40 @@ Variables are names that we give to objects in memory.
 Variables are named with `snake_case` using all lowercase letters and underscores between words. One can include digits within a variable name, but they may not start with a digit.
 
 #### initialization, assignment, and reassignment 
-Variables are intialized and assigned by setting a variable name equal to a value. Reassign a variable by setting a variable name that has already been used in a program equal to another value.
+Variables are intialized and assigned by setting a variable name equal to a value. Reassign a variable by setting a variable name that has already been used equal to another value. Variable reassignment (without augmented assignment) almost always creates a new object in memory, even if the object being reassigned is mutable.
 
 ```python
-my_var = "Hello"
-print(id(my_var))    # 4411174096
+my_var = ['Hello']
+print(id(my_var))    # 4395536512
 
-my_var = "Hello"
-print(id(my_var))    # 4411174096
+my_var = ['Hello']
+print(id(my_var))    # 4395536192
+```
 
+The exception to this occurs with interned values. When a value is interned, any new variable assigned to that value becomes an alias for its location in memory.
+
+```python
+# The string object 'Hello' is interned
+my_var = "Hello"
+print(id(my_var))        # 4421994752
+
+my_new_var = "Hello"
+print(id(my_new_var))    # 4421994752
+
+my_var = "Hi"
+print(id(my_var))        # 4421993840
+
+
+# The string object 'Hello, world!' is not interned
+my_var = "Hello, world!"
+print(id(my_var))        # 4422021872
 
 my_var = "Hello, world!"
-print(id(my_var))    # 4415730928
-
-my_var = "Hello, world!"
-print(id(my_var))    # 4415731056
+print(id(my_var))        # 44422021936
 ```
 
 #### scope
-Variable scope describes where in code a variable can be accessed by name. A particular variable's scope depends on where it was initialized. Variables initialized within an outer scope are accessible within all its nested inner scopes; therefore, variables initialized within the global scope are accessible everywhere in a program. However, variables initialized in an inner scope are no accessible to their outer scopes unless initialized using the `global` or `nonlocal` keywords.
+Variable scope describes where in code a variable can be accessed by name. A particular variable's scope depends on where it was initialized. Variables initialized within an outer scope are accessible within all its nested inner scopes; therefore, variables initialized within the global scope are accessible everywhere in a program. However, variables initialized in an inner scope are not accessible to their outer scopes unless initialized using the `global` or `nonlocal` keywords.
 
 #### `global` keyword 
 The `global` keyword alerts Python to local for a variable name in the global scope, or if a name is yet unused, to add the name to the global scope. We use the `global` keyword within functions to avoid variable shadowing or to initialize variables within functions that we want to access in the global scope
@@ -512,7 +556,7 @@ print(my_list)
 ```
 
 #### variable shadowing
-Variable shadowing occurs when a variable within an outer scope and a variable within it's inner scope share the same name. When this variable is invoked in the inner scope, it points to the object it was assigned in the inner scope, rather than in the outer scope, and "shadows" the object it was assigned in the outer scope. For example...
+Variable shadowing occurs when a variable within an outer scope shares a name with a variable within it's inner scope. When this variable is invoked in the inner scope, it points to the object it was assigned in the inner scope, rather than in the outer scope, and "shadows" the object it was assigned in the outer scope. For example...
 
 ```python
 greeting = "Hello"
@@ -538,7 +582,51 @@ A `while` loop evaluates a conditional statement and performs its tasks as long 
 
 ### `print()` and `input()`
 
-### exceptions (when they will occur and how to handle them) 
+### exceptions (when they will occur and how to handle them)
+Exceptions occur when there is code that Python cannot interpret. The seven types of excepions discussed in Launch School are `ZeroDivisionError`, `KeyError`, `IndexError`, `NameError`, `TypeError`, `ValueError`, and `SyntaxError`. Exception handling can be broken down into four steps:
+
+1. **Try:** This block contains the code that might raise an exception.
+2. **Except:** If an exception is raised in `try` block, Python will look for a matching `except` block that can handle that specific type of exception. If a match is found, the code within the corresponding `except` block will execute. There can be multiple `except` blocks following a `try` block.
+3. **Else:** This block is executed only if no exceptions raised in `try` block and, thus, if the `except` block is not executed.
+4. **Finally:** This block is always executed, whether errors raised or not. Used for cleanup operations or mandatory tasks.
+
+```python
+def invalid_number(number_string):
+    try: 
+        print("Executing try block...")
+        int(number_string)
+    except TypeError:
+        print("Executing TypeError exception block...")
+        return True
+    except ValueError:
+        print("Executing ValueError exception block...")
+        return True
+    else:
+        print("Executing else block...")
+    finally:
+        print("Executing finally block...")
+
+    return False
+
+print(invalid_number("10"))
+# Executing try block...
+# Executing else block...
+# Executing finally block...
+# False
+
+print(invalid_number("10.0"))
+# Executing try block...
+# Executing ValueError exception block...
+# Executing finally block...
+# True
+
+print(invalid_number([10]))
+# Executing try block...
+# Executing TypeError exception block...
+# Executing finally block...
+# True
+
+```
 
 ### functions:
 
