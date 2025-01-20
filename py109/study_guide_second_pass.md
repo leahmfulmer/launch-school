@@ -418,7 +418,8 @@ print(1)       # 1
 ```
 
 ### mutability and immutability
-Mutability refers to the abilty to mutate an object in memory once it has been created. Mutable objects can be changed "in-place", at their location in memory, after they have been initialized. Mutable objects include lists, dictionaries, sets, and functions. Immutable objects cannot be changed in-place after they have been initialized. Immutable objects include integers, floats, strings, Booleans, ranges, tuples, frozensets, and `None`.
+Mutability refers to the abilty to mutate an object in memory once it has been initialized. Mutable objects can be changed "in-place", or at their location in memory, after they have been initialized. Mutable objects include lists, dictionaries, sets, and functions. Immutable objects cannot be changed in-place once they have been initialized. Immutable objects include integers, floats, strings, Booleans, ranges, tuples, frozensets, and `None`.
+
 
 ```python
 # mutability
@@ -435,3 +436,99 @@ print(id(my_int))     # 4315406592
 my_int += 4
 print(id(my_int))     # 4315406720
 ```
+
+### variables
+Variables are names that we give to objects in memory.
+
+#### naming conventions
+Variables are named with `snake_case` using all lowercase letters and underscores between words. One can include digits within a variable name, but they may not start with a digit.
+
+#### initialization, assignment, and reassignment 
+Variables are intialized and assigned by setting a variable name equal to a value. Reassign a variable by setting a variable name that has already been used in a program equal to another value.
+
+```python
+my_var = "Hello"
+print(id(my_var))    # 4411174096
+
+my_var = "Hello"
+print(id(my_var))    # 4411174096
+
+
+my_var = "Hello, world!"
+print(id(my_var))    # 4415730928
+
+my_var = "Hello, world!"
+print(id(my_var))    # 4415731056
+```
+
+#### scope
+Variable scope describes where in code a variable can be accessed by name. A particular variable's scope depends on where it was initialized. Variables initialized within an outer scope are accessible within all its nested inner scopes; therefore, variables initialized within the global scope are accessible everywhere in a program. However, variables initialized in an inner scope are no accessible to their outer scopes unless initialized using the `global` or `nonlocal` keywords.
+
+#### `global` keyword 
+The `global` keyword alerts Python to local for a variable name in the global scope, or if a name is yet unused, to add the name to the global scope. We use the `global` keyword within functions to avoid variable shadowing or to initialize variables within functions that we want to access in the global scope
+
+```python
+# avoid variable shadowing
+greeting = "Hello"
+
+def say_hi(name):
+    global greeting
+    greeting = "Hi"
+    print(f'{greeting}, {name}!')
+
+say_hi("Leah")     # "Hi, Leah!"
+print(greeting)    # "Hi"
+
+
+# initialize a variable within a function
+# that we want to access in the global scope
+def initialize_greeting():
+    global greeting
+    greeting = "Ahoy!"
+
+initialize_greeting()
+print(greeting)    # "Ahoy!"
+```
+
+#### variables as pointers 
+Variables are described as "pointers" because they reference or "point to" object located in memory, rather than "containing" or "being" objects themselves. Let's see an example...
+
+```python
+# this is not a reassignment of the 'my_list' variable;
+# it's a mutation of the list object referenced by 'my_list'
+my_list = ['I', 'love', 'you']
+print(id(my_list))       # 4415785728
+print(id(my_list[1]))    # 4411175392
+
+my_list[1] = 'adore'
+print(id(my_list))       # 4415785728
+print(id(my_list[1]))    # 4411170400
+
+print(my_list)
+
+# (it's also a reassignment of the list object 
+# element at index 1, but it's not a mutation of
+# that element because strings are immutable)
+```
+
+#### variable shadowing
+Variable shadowing occurs when a variable within an outer scope and a variable within it's inner scope share the same name. When this variable is invoked in the inner scope, it points to the object it was assigned in the inner scope, rather than in the outer scope, and "shadows" the object it was assigned in the outer scope. For example...
+
+```python
+greeting = "Hello"
+
+def say_hi(name):
+    greeting = "Hi"
+    print(f'{greeting}, {name}!')
+
+say_hi("Leah")     # "Hi, Leah!"
+print(greeting)    # "Hello"
+```
+
+The effect of variable shadowing in this example is that, even though the global variable `greeting` continually points to the string object `"Hello"`, it is shadowed by the local variable `greeting` within the function `say_hi`. Therefore, when we invoke `say_hi`, the output is `"Hi, Leah!"`. <br><br>
+
+### conditionals and loops
+
+#### `for` 
+
+#### `while`
