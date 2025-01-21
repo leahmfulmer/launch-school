@@ -581,6 +581,21 @@ A `for` loop iterates over a sequence, such as a range, and performs a task duri
 A `while` loop evaluates a conditional statement and performs its tasks as long as the statement evaluates to `True`. The `while` loop ends when the condition is no longer met.<br><br>
 
 ### `print()` and `input()`
+The built-in functions `print()` and `input()` either output data to the console or input data from the console. They involve implicit coersion, as `print()` coerces all data types to strings before outputing them to the console, and `input()` coerces all data types to strings before assigning them to a variable within a function.
+```python
+def say_hi():
+    # input() pauses the function execution 
+    # to receive an input from the console
+    name = input("What's your name? ")       # What's your name?  Leah
+
+    # input() coerces all inputs to strings
+    age = input("What's your age? ")         # What's your age?  30
+    
+    print(f"Hi, {name}! Welcome to {age}!")
+
+say_hi()    # Hi, Leah! Welcome to 30!
+```
+
 
 ### exceptions (when they will occur and how to handle them)
 Exceptions occur when there is code that Python cannot interpret. The seven types of excepions discussed in Launch School are `ZeroDivisionError`, `KeyError`, `IndexError`, `NameError`, `TypeError`, `ValueError`, and `SyntaxError`. Exception handling can be broken down into four steps:
@@ -633,6 +648,7 @@ Functions create reusable pieces of code that can be invoked with at each instan
 
 #### definitions and calls 
 Functions are defined using the `def` keyword followed the function name in `snake_case`, parentheses, and a colon. Their parameters are declared within the parenteses following the function name. Functions are called using the function name and any input arguments, if the function excepts them.<br><br>
+
 ```python
 # this is the function definition
 def say_hi(name):
@@ -663,14 +679,31 @@ say_hi('Leah')    # Hi, Leah!!!
 When a function is defined within another function, it is known as a nested function. Variable scoping rules day that variables initialized within an outer function can be accessed in their nested functions, but variables initialized within a nested function cannot be accessed by their enclosing functions. Nested functions can shadow variables within their enclosing functions as well.
 
 #### output vs. return values, side effects 
-Function outputs are anything that is displayed to the console during the function's execution. For example, if anything is printed within a function body, the printed message is considered an output. Return values, however, are specifically the values within the function return statment; they are returned to the caller, not displayed in the console. Side effects are any outputs or operations that are not directly returned to the caller in the return statement. Function are said to have side effects if they...
+Function outputs are anything that is displayed to the console during the function's execution. For example, if anything is printed within a function body, the printed message is considered an output. Return values, however, are specifically the values within the function's return statement; they are returned to the caller, not displayed in the console. Side effects are any outputs or actions that are not returned in the return statement. Function are said to have side effects if they...
 
 * reassign any non-local variables.
 * modify the value of any data structure passed as an argument or accessed directly from the outer scope (e.g., mutating a list).
-* read from / write to a file, network connection, browser, or the system hardware, *including printing and reading input from the terminal*.
+* read from / write to a file, network connection, browser, or the system hardware, including printing and reading input from the console.
 * raise exceptions without handling them.
 * call other functions that have side effects.
 
 
 ### expressions and statements
-Expressions are parts of code that evaluate to a value; satements are parts of code that do not evaluate to a value.
+Expressions are parts of code that are evaluated to produce a new object. Remember that expressions prouce a value that can then be assigned to a variable, passed to a function / method, or returned by a function / method. Examples of expressions include...
+
+* literals: `0`, `1.234`, `Leah`, `True`, `None`
+* variable references: `foo` or `name` when these variables have already been defined
+* arithmetic operations: `a - b`, `a * b + 12`
+* comparison operations: `'x' != 'y'`, `5 <= 10`
+* string operations: `'hello' + ', world!'`, `iloveyou * 1000`
+* function calls: `print('i love you')`, `len('i love you')`
+* any combinatio of the above that evaluates to a single object
+
+Statements are instructions that tell Python to perform an action and, importantly, do not output any value. Examples of statements include...
+
+* assignment: `x = 1`
+    * interestingly, both `x` and `1` are expressions, but `x = 1` is a statement
+* control flow: `if`, `elif`, `else`, `while`, `for`, etc.
+* function definitions: `def`
+* return statements: `return`
+* import statements: `import`
