@@ -1,0 +1,5 @@
+# Ignore these files
+.DS_Store
+.ipynb_checkpoints
+intro_to_programming_with_python/exercises/.ipynbcheckpoints
+py109/original_study_guide.pdf
