@@ -535,7 +535,7 @@ print(greeting)    # "Ahoy!"
 ```
 
 #### variables as pointers 
-Variables are described as "pointers" because they reference or "point to" object located in memory, rather than "containing" or "being" objects themselves. Let's see an example...
+Variables are described as "pointers" because they reference or "point to" a location in memory or "address space" that contains the object assigned to the value. One can also describe variables as "references", which is used interchangably with "poiners". Let's see an example...
 
 ```python
 # this is not a reassignment of the 'my_list' variable;
@@ -629,15 +629,48 @@ print(invalid_number([10]))
 ```
 
 ### functions:
+Functions create reusable pieces of code that can be invoked with at each instance of execution.<br><br>
 
 #### definitions and calls 
+Functions are defined using the `def` keyword followed the function name in `snake_case`, parentheses, and a colon. Their parameters are declared within the parenteses following the function name. Functions are called using the function name and any input arguments, if the function excepts them.<br><br>
+```python
+# this is the function definition
+def say_hi(name):
+    print(f'Hi, {name}!!!')
+
+# this is the function call
+say_hi('Leah')    # Hi, Leah!!!
+```
 
 #### return values
+Functions pass return values to their caller eitherwhen they reach the end of their body, or when they encounter the `return` keyword. This return statement immediately exits the function and outputs a return value. It may be an explicit return value, specified directly after the `return` keyword, or an implicit return value (`None`) if none is specified. It's important to remember that all functions return something unless they raise an exception; if no return value is specified, the function returns `None`.
 
 #### parameters vs. arguments 
+Parameters are declared within the function definition; they are placeholders for potential arguments passed into a function when it is invoked. Arguments are the actual values that get passed in during the function invocation.
+
+```python
+# the function definition of 'say_hi' declares 
+# one parameter as a local variable: 'name'
+def say_hi(name):
+    print(f'Hi, {name}!!!')
+
+# the function invocation of 'say_hi' passes
+# one argument: the string 'Leah'
+say_hi('Leah')    # Hi, Leah!!!
+```
 
 #### nested functions
+When a function is defined within another function, it is known as a nested function. Variable scoping rules day that variables initialized within an outer function can be accessed in their nested functions, but variables initialized within a nested function cannot be accessed by their enclosing functions. Nested functions can shadow variables within their enclosing functions as well.
 
 #### output vs. return values, side effects 
+Function outputs are anything that is displayed to the console during the function's execution. For example, if anything is printed within a function body, the printed message is considered an output. Return values, however, are specifically the values within the function return statment; they are returned to the caller, not displayed in the console. Side effects are any outputs or operations that are not directly returned to the caller in the return statement. Function are said to have side effects if they...
+
+* reassign any non-local variables.
+* modify the value of any data structure passed as an argument or accessed directly from the outer scope (e.g., mutating a list).
+* read from / write to a file, network connection, browser, or the system hardware, *including printing and reading input from the terminal*.
+* raise exceptions without handling them.
+* call other functions that have side effects.
+
 
 ### expressions and statements
+Expressions are parts of code that evaluate to a value; satements are parts of code that do not evaluate to a value.
