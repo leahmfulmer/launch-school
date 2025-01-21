@@ -1,5 +1,11 @@
 # PY 109 Study Guide: Python Basics
 
+Just for fun, here is a summary of all Python data types...
+| Type | Class | Category | Primitive? | Mutable? |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | `(`expressions...`)`, `[`expressions...`]`, `{`key`:`value...`}`, `{`expressions...`}` | Binding or parenthesized expression, list display, dictionary display, set display |
+
+
 ### naming convention: legal vs. idiomatic, illegal vs. non-idiomatic<br>`CONFIDENT`
 
 In Python, legal naming conventions are those which are allowed by Python's syntax (i.e., they can be used without raising an error). Legal names...
@@ -48,6 +54,15 @@ With respect to large numbers, one may represent commas with underscores:
 Furthermore, one may represent large floats with scientific notation, but large integers are never represented with scientific notation:
 * `print(float(3e16))` returns `3e16`
 * `print(int(3e16))` returns `30000000000000000`<br><br>
+
+One thing to note is that floating point numbers contain **imprecision**. Floating point numbers are stored in binary format, which cannot precisely represent many decimals using only powers of two. Some values become recurring decimals in binary, and thus cannot be completely represented with limited data storage. This may cause unexpected errors; use `math.isclose()`.
+
+```python
+print(0.1 + 0.2 == 0.3)         # False
+
+import math
+math.isclose(0.1 + 0.2, 0.3)    # True
+```
 
 ### strings<br>`CONFIDENT`
 Strings are immutable, primitive text sequences. They can be represented with single quotes (`'hi'`), double quotes (`"hello"`), or triple single quotes (`'''`) or triple double quotes (`"""`)for multi-line strings. If a quote contains both single and double quotes in its body, you may use triple quotes or escape characters:
@@ -292,8 +307,8 @@ Arithmetic operators perform mathematical functions on Python's numeric values. 
 * Exponentiation (`**`) performs an operation of the first operand raised to the power of the second operand; the resulting data type depends on those of the operands.
 
 
-#### string operators: `+`<br>`CONDFIDENT`
-Strings may be concatenated using the `+` operator.
+#### string operators: `+`
+Strings may be concatenated using the `+` operator. This always returns a new objects, because strings cannot be mutated.
 
 ```python
 string1 = "I love you"
@@ -301,13 +316,29 @@ string2 = " so much!"
 print(string1 + string2)    # I love you so much!
 ```
 
-#### list operators: `+`<br>`CONDFIDENT`
-List may be concatenated using the `+` operator.
+#### list operators: `+`
+List may be concatenated using the `+` operator. This may mutate a list if executed with augmented assignment, or create a new list if executed without augmented assignment.
 
 ```python
 list1 = ['I', 'love', 'you']
+print(list1)        # ['I', 'love', 'you']
+print(id(list1))    # 4574835008
+
 list2 = [4, 'ever']
-print(list1 + list2)    # ['I', 'love', 'you', 4, 'ever']
+print(list2)        # [ 4, 'ever']
+print(id(list2))    # 4636840192
+
+# list concatentation with augmented
+# assignment mutates a list in-place
+list1 += list2
+print(list1)        # ['I', 'love', 'you', 4, 'ever']
+print(id(list1))    # 4574835008
+
+# list concatenation without augmented 
+# assignment creates a new list
+list1 = list1 + list2
+print(list1)        # ['I', 'love', 'you', 4, 'ever', 4, 'ever']
+print(id(list1))    # 4636805248
 ```
 
 #### comparison: `==`, `!=`, `<`, `>`, `<=`, `>=`
@@ -346,7 +377,7 @@ print(not "")               # True
 print(not "I love you!")    # False
 ```
 
-#### identity: `is`, `is not` 
+#### identity: `is`, `is not`
 
 The identity operator evaluates an object's location in memory, not its value. `is` returns `True` if two objects point to the same location in memory and `False` if two objects point to different memory location. The operator `is not` returns the opposite Boolean value of `is`. Use the function `id()` to evaluate an object's location in memory, represented as an integer. When objects share the same location in memory, this is known as aliasing.
 
@@ -382,7 +413,7 @@ print(id(e) == id(f))    # True
 ```
 
 
-#### operator precedence
+#### operator precedence<br>
 
 Operators with higher precedence are evaluated before operatorss with lower precedence. Operands "bind more tightly" to operators of higher precedence, meaning operands belonging to two operators will evaluate within the context of the higher-precedence operator first.
 
@@ -417,6 +448,29 @@ print(truthy or ((2 >= 1.5) and ('c' > 'a')))
 print(1)       # 1
 ```
 
+Just for fun, here is operator precedence for all Python actions...
+
+| Precedence | Operator | Description|
+| :--- | :--- | :--- |
+| 1 | `(`expressions...`)`, `[`expressions...`]`, `{`key`:`value...`}`, `{`expressions...`}` | Binding or parenthesized expression, list display, dictionary display, set display |
+| 2 | x`[index]`, x`[index:index]`, x`(arguments...)`, x`.attribute` | Subscription, slicing, call, attribute reference |
+| 3 | `await` x | Await expression |
+| 4 | `**` | Exponentiation |
+| 5 | `+`x, `-`x, `~`x | Positive, negative, bitwise NOT |
+| 6 | `*`, `@`, `/`, `//`, `%` | Multiplication, matrix multiplication, division, floor division, remainder (modulo) |
+| 7 | `+`, `-` | Addition and subtraction |
+| 8 | `<<`, `>>` | Shifts |
+| 9 | `&` | Bitwise AND |
+| 10 | `^` | Bitwise XOR |
+| 11 | `\|` | Bitwise OR |
+| 12 | `in`, `not in`, `is`, `is not`, `<`, `<=`, `>`, `>=`, `!=`, `==` | Comparisons, including membership tests and identity tests |
+| 13 | `not` x | Boolean NOT |
+| 14 | `and` | Boolean AND |
+| 15 | `or` | Boolean OR |
+| 16 | `if` - `else` | Conditional expression |
+| 17 | `lambda` | Lambda expression |
+| 18 | `:=` | Assignment expression |
+
 ### mutability and immutability
 Mutability refers to the abilty to mutate an object in memory once it has been initialized. Mutable objects can be changed "in-place", or at their location in memory, after they have been initialized. Mutable objects include lists, dictionaries, sets, and functions. Immutable objects cannot be changed in-place once they have been initialized. Immutable objects include integers, floats, strings, Booleans, ranges, tuples, frozensets, and `None`.
 
@@ -424,16 +478,20 @@ Mutability refers to the abilty to mutate an object in memory once it has been i
 ```python
 # mutability
 my_list = [1, 2, 3]
+print(my_list)        # [1, 2, 3]
 print(id(my_list))    # 4415656448
 
 my_list += [4]
+print(my_list)        # [1, 2, 3, 4]
 print(id(my_list))    # 4415656448
 
 # immutability
 my_int = 4
+print(my_int)         # 4
 print(id(my_int))     # 4315406592
 
 my_int += 4
+print(my_int)         # 8
 print(id(my_int))     # 4315406720
 ```
 
@@ -444,25 +502,40 @@ Variables are names that we give to objects in memory.
 Variables are named with `snake_case` using all lowercase letters and underscores between words. One can include digits within a variable name, but they may not start with a digit.
 
 #### initialization, assignment, and reassignment 
-Variables are intialized and assigned by setting a variable name equal to a value. Reassign a variable by setting a variable name that has already been used in a program equal to another value.
+Variables are intialized and assigned by setting a variable name equal to a value. Reassign a variable by setting a variable name that has already been used equal to another value. Variable reassignment (without augmented assignment) almost always creates a new object in memory, even if the object being reassigned is mutable.
 
 ```python
-my_var = "Hello"
-print(id(my_var))    # 4411174096
+my_var = ['Hello']
+print(id(my_var))    # 4395536512
 
-my_var = "Hello"
-print(id(my_var))    # 4411174096
+my_var = ['Hello']
+print(id(my_var))    # 4395536192
+```
 
+The exception to this occurs with interned values. When a value is interned, any new variable assigned to that value becomes an alias for its location in memory.
+
+```python
+# The string object 'Hello' is interned
+my_var = "Hello"
+print(id(my_var))        # 4421994752
+
+my_new_var = "Hello"
+print(id(my_new_var))    # 4421994752
+
+my_var = "Hi"
+print(id(my_var))        # 4421993840
+
+
+# The string object 'Hello, world!' is not interned
+my_var = "Hello, world!"
+print(id(my_var))        # 4422021872
 
 my_var = "Hello, world!"
-print(id(my_var))    # 4415730928
-
-my_var = "Hello, world!"
-print(id(my_var))    # 4415731056
+print(id(my_var))        # 44422021936
 ```
 
 #### scope
-Variable scope describes where in code a variable can be accessed by name. A particular variable's scope depends on where it was initialized. Variables initialized within an outer scope are accessible within all its nested inner scopes; therefore, variables initialized within the global scope are accessible everywhere in a program. However, variables initialized in an inner scope are no accessible to their outer scopes unless initialized using the `global` or `nonlocal` keywords.
+Variable scope describes where in code a variable can be accessed by name. A particular variable's scope depends on where it was initialized. Variables initialized within an outer scope are accessible within all its nested inner scopes; therefore, variables initialized within the global scope are accessible everywhere in a program. However, variables initialized in an inner scope are not accessible to their outer scopes unless initialized using the `global` or `nonlocal` keywords.
 
 #### `global` keyword 
 The `global` keyword alerts Python to local for a variable name in the global scope, or if a name is yet unused, to add the name to the global scope. We use the `global` keyword within functions to avoid variable shadowing or to initialize variables within functions that we want to access in the global scope
@@ -491,7 +564,7 @@ print(greeting)    # "Ahoy!"
 ```
 
 #### variables as pointers 
-Variables are described as "pointers" because they reference or "point to" object located in memory, rather than "containing" or "being" objects themselves. Let's see an example...
+Variables are described as "pointers" because they reference or "point to" a location in memory or "address space" that contains the object assigned to the value. One can also describe variables as "references", which is used interchangably with "poiners". Let's see an example...
 
 ```python
 # this is not a reassignment of the 'my_list' variable;
@@ -512,7 +585,7 @@ print(my_list)
 ```
 
 #### variable shadowing
-Variable shadowing occurs when a variable within an outer scope and a variable within it's inner scope share the same name. When this variable is invoked in the inner scope, it points to the object it was assigned in the inner scope, rather than in the outer scope, and "shadows" the object it was assigned in the outer scope. For example...
+Variable shadowing occurs when a variable within an outer scope shares a name with a variable within it's inner scope. When this variable is invoked in the inner scope, it points to the object it was assigned in the inner scope, rather than in the outer scope, and "shadows" the object it was assigned in the outer scope. For example...
 
 ```python
 greeting = "Hello"
@@ -528,7 +601,138 @@ print(greeting)    # "Hello"
 The effect of variable shadowing in this example is that, even though the global variable `greeting` continually points to the string object `"Hello"`, it is shadowed by the local variable `greeting` within the function `say_hi`. Therefore, when we invoke `say_hi`, the output is `"Hi, Leah!"`. <br><br>
 
 ### conditionals and loops
+Conditionals take part in the control flow of a program. They use a combination of `if`, `elif`, and `else` statements along with comparison, logical, and membership operators (`==`, `!=`, `<`, `<=`, `>`, `>=`, `in`, `not in`, `is`, `is not`, `and`, `or`, `not`) in order to direct Python to certain operations under certain conditions. Loops are an efficient way to iterate over a sequence of objects, or continuously while a condition is met, and perform an operation at each iteration. There are two types of loops: `for` and `while`.
 
 #### `for` 
+A `for` loop iterates over a sequence, such as a range, and performs a task during each iteration. The `for` loop ends when it has iterated over all the items in the sequence and performed the respective tasks.
 
 #### `while`
+A `while` loop evaluates a conditional statement and performs its tasks as long as the statement evaluates to `True`. The `while` loop ends when the condition is no longer met.<br><br>
+
+### `print()` and `input()`
+The built-in functions `print()` and `input()` either output data to the console or input data from the console. They involve implicit coersion, as `print()` coerces all data types to strings before outputing them to the console, and `input()` coerces all data types to strings before assigning them to a variable within a function.
+```python
+def say_hi():
+    # input() pauses the function execution 
+    # to receive an input from the console
+    name = input("What's your name? ")       # What's your name?  Leah
+
+    # input() coerces all inputs to strings
+    age = input("What's your age? ")         # What's your age?  30
+    
+    print(f"Hi, {name}! Welcome to {age}!")
+
+say_hi()    # Hi, Leah! Welcome to 30!
+```
+
+
+### exceptions (when they will occur and how to handle them)
+Exceptions occur when there is code that Python cannot interpret. The seven types of excepions discussed in Launch School are `ZeroDivisionError`, `KeyError`, `IndexError`, `NameError`, `TypeError`, `ValueError`, and `SyntaxError`. Exception handling can be broken down into four steps:
+
+1. **Try:** This block contains the code that might raise an exception.
+2. **Except:** If an exception is raised in `try` block, Python will look for a matching `except` block that can handle that specific type of exception. If a match is found, the code within the corresponding `except` block will execute. There can be multiple `except` blocks following a `try` block.
+3. **Else:** This block is executed only if no exceptions raised in `try` block and, thus, if the `except` block is not executed.
+4. **Finally:** This block is always executed, whether errors raised or not. Used for cleanup operations or mandatory tasks.
+
+```python
+def invalid_number(number_string):
+    try: 
+        print("Executing try block...")
+        int(number_string)
+    except TypeError:
+        print("Executing TypeError exception block...")
+        return True
+    except ValueError:
+        print("Executing ValueError exception block...")
+        return True
+    else:
+        print("Executing else block...")
+    finally:
+        print("Executing finally block...")
+
+    return False
+
+print(invalid_number("10"))
+# Executing try block...
+# Executing else block...
+# Executing finally block...
+# False
+
+print(invalid_number("10.0"))
+# Executing try block...
+# Executing ValueError exception block...
+# Executing finally block...
+# True
+
+print(invalid_number([10]))
+# Executing try block...
+# Executing TypeError exception block...
+# Executing finally block...
+# True
+
+```
+
+### functions:
+Functions create reusable pieces of code that can be invoked with at each instance of execution.
+
+#### definitions and calls 
+Functions are defined using the `def` keyword followed the function name in `snake_case`, parentheses, and a colon. Their parameters are declared within the parenteses following the function name. Functions are called using the function name and any input arguments, if the function excepts them.
+
+```python
+# this is the function definition
+def say_hi(name):
+    print(f'Hi, {name}!!!')
+
+# this is the function call
+say_hi('Leah')    # Hi, Leah!!!
+```
+
+#### return values
+Functions pass return values to their caller eitherwhen they reach the end of their body, or when they encounter the `return` keyword. This return statement immediately exits the function and outputs a return value. It may be an explicit return value, specified directly after the `return` keyword, or an implicit return value (`None`) if none is specified. It's important to remember that all functions return something unless they raise an exception; if no return value is specified, the function returns `None`.
+
+#### parameters vs. arguments 
+Parameters are declared within the function definition; they are placeholders for potential arguments passed into a function when it is invoked. Arguments are the actual values that get passed in during the function invocation.
+
+```python
+# the function definition of 'say_hi' declares 
+# one parameter as a local variable: 'name'
+def say_hi(name):
+    print(f'Hi, {name}!!!')
+
+# the function invocation of 'say_hi' passes
+# one argument: the string 'Leah'
+say_hi('Leah')    # Hi, Leah!!!
+```
+
+#### nested functions
+When a function is defined within another function, it is known as a nested function. Variable scoping rules day that variables initialized within an outer function can be accessed in their nested functions, but variables initialized within a nested function cannot be accessed by their enclosing functions. Nested functions can shadow variables within their enclosing functions as well.
+
+#### output vs. return values, side effects 
+Function outputs are anything that is displayed to the console during the function's execution. For example, if anything is printed within a function body, the printed message is considered an output. Return values, however, are specifically the values within the function's return statement; they are returned to the caller, not displayed in the console. Side effects are any outputs or actions that are not returned in the return statement. Function are said to have side effects if they...
+
+* reassign any non-local variables.
+* modify the value of any data structure passed as an argument or accessed directly from the outer scope (e.g., mutating a list).
+* read from / write to a file, network connection, browser, or the system hardware, including printing and reading input from the console.
+* raise exceptions without handling them.
+* call other functions that have side effects.
+
+
+### expressions and statements
+Expressions are parts of code that are evaluated to produce a new object. Remember that expressions prouce a value that can then be assigned to a variable, passed to a function / method, or returned by a function / method. Examples of expressions include...
+
+* literals: `0`, `1.234`, `Leah`, `True`, `None`
+* variable references: `foo` or `name` when these variables have already been defined
+* arithmetic operations: `a - b`, `a * b + 12`
+* comparison operations: `'x' != 'y'`, `5 <= 10`
+* string operations: `'hello' + ', world!'`, `iloveyou * 1000`
+* function calls: `print('i love you')`, `len('i love you')`
+* any combinatio of the above that evaluates to a single object
+
+Statements are instructions that tell Python to perform an action and, importantly, do not output any value. Examples of statements include...
+
+* assignment: `x = 1`
+    * interestingly, both `x` and `1` are expressions, but `x = 1` is a statement
+* control flow: `if`, `elif`, `else`, `while`, `for`, etc.
+* function definitions: `def`
+* return statements: `return`
+* import statements: `import`
