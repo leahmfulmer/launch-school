@@ -17,7 +17,7 @@ Just for fun, here is a summary of all Python data types...
 | `None` | `NoneType` | nulls | inconclusive | immutable |
 
 
-### naming convention: legal vs. idiomatic, illegal vs. non-idiomatic<br>`CONFIDENT`
+## naming convention: legal vs. idiomatic, illegal vs. non-idiomatic
 
 In Python, legal naming conventions are those which are allowed by Python's syntax (i.e., they can be used without raising an error). Legal names...
 * begin with a letter or underscore
@@ -42,7 +42,7 @@ Non-idomatic naming conventions are allowed by Python's syntax, but they violate
 * a class that uses `camelCase` 
 * any surprising mix of cases: `tHis_iS_My_VarIAbLe`<br><br>
 
-### type coercions: explicit (e.g., using `int()`, `str()`) and implicit<br>`ALMOST THERE`
+## type coercions: explicit (e.g., using `int()`, `str()`) and implicit
 
 Type coercion involves changing an object value from one data type to another. This can happen explicitly with constructor function...
 * `int()`, `float()`, `str()`, `list()`, `dict()`, `tuple()`, `set()`, `frozenset()` convert objects to integers, floats, strings, lists, dictionaries, tuples, sets, and frozensets, respectively.<br><br>
@@ -52,7 +52,7 @@ Or it can happen implicitly in a variety of ways:
 * Mathematical statements involving type mixing may convert to a `float`: `4 + 2.0 = 6.0`
 * Invoking the `print()` function implicitly converts all input to a string object before printing.<br><br>
 
-### numbers<br>`ALMOST THERE`
+## numbers
 There are several types of numbers in Python; the ones we primarily consider in Launch School are integers (`int`) and floats (`float`). Integers are whole numbers and do not include a decimal point. Floats are real numbers and always include a decimal point, even if there is not decimal value. Both integers and floats are immutable, primitive data types.
 
 * `int`: `1`, `-1`
@@ -75,7 +75,7 @@ import math
 math.isclose(0.1 + 0.2, 0.3)    # True
 ```
 
-### strings<br>`CONFIDENT`
+## strings
 Strings are immutable, primitive text sequences. They can be represented with single quotes (`'hi'`), double quotes (`"hello"`), or triple single quotes (`'''`) or triple double quotes (`"""`)for multi-line strings. If a quote contains both single and double quotes in its body, you may use triple quotes or escape characters:
 * `'''What d'you mean by "closed"?'''`
 * `"What d'you mean by \"closed\"?"`<br><br>
@@ -84,7 +84,7 @@ In many cases, strings share the same behavior as sequences. They can be...
 * indexed: `'hello'[0] == 'h'` returns `True`; `'hello'[-4] == 'e'` returns `True`
 * sliced: `'hello'[0:2] == 'he'` returns `True`; `'hello'[::2] == 'hlo'` returns `True`<br><br>
 
-### f-strings<br>`CONFIDENT`
+## f-strings
 Formatted string literals, or f-strings, allow for an operation called string interpolation in which string literals are embedded with expressions. If you want to use literal burly brackets in your string, just double them up!
 ```Python
 age = 30
@@ -99,61 +99,61 @@ print(f'{my_number:,}')    # 1,234.5678
 print(f'{my_number:_}')    # 1_234.5678
 ```
 
-### string methods<br>`CONFIDENT`
+## string methods
 As immutable objects, strings cannot be mutated under any circumstances. However, string methods can be performed on strings, returning a new string object with the intended modifications.<br><br>
 
-#### `str.capitalize()`
+### `str.capitalize()`
 Returns a copy of `str` with the first letter capitalized and the remaining letters in lowercase.<br><br>
 
-#### `str.swapcase()`
+### `str.swapcase()`
 Returns a copy of `str` with cases completely swapped: lowercase characters becomes uppercase and uppercase characters become lowercase.<br><br>
 
 
-#### `str.upper()`
+### `str.upper()`
 Returns a copy of `str` with all characters in uppercase.<br><br>
 
-#### `str.lower()`
+### `str.lower()`
 Returns a copy of `str` with all characters in lowercase.<br><br>
 
-#### `str.isalpha()`
+### `str.isalpha()`
 Returns `True` if all characters in `str` are alphabetic, or `False` if any character is non-alphabetic. *Note:* Python is aware of all Unicode characters, even those that are not in English. To include only ascii characters, use `str.isalpha() and str.isascii()`.<br><br>
 
-#### `str.isdigit()`
+### `str.isdigit()`
 Returns `True` if all characters in `str` are digits, or `False` if any character is not a digit.<br><br>
 
-#### `str.isalnum()`
+### `str.isalnum()`
 Returns `True` if all characters in `str` are alphabetic or digits, or `False` if any character is neither alphabetic nor a digit.<br><br>
 
-#### `str.islower()`
+### `str.islower()`
 Returns `True` if all characters in `str` are lowercase, or `False` if any character is not lowercase.<br><br>
 
-#### `str.isupper()`
+### `str.isupper()`
 Returns `True` if all characters in `str` are uppercase, or `False` if any character is not uppercase.<br><br>
 
-#### `str.isspace()`
+### `str.isspace()`
 Returns `True` if all characters in `str` are whitespace characters, including space (`' '`), newline (`'\n'`), tab (`'\t'`), carriage return (`'\r'`), vertical tab (`'v'`), and form feed (`'f'`), as well as foreign whitespace characters, or `False` where this is not the case.<br><br>
 
-#### `str.strip('characters')`
+### `str.strip('characters')`
 Returns a copy of `str` with leading and trailing whitespace characters removed. This method can take an argument such as `str.strip('+')` to remove all leading and trailing instances of those characters from the copied string. *Note:* This method removes characters, not substrings.
 ```Python
 my_string = 'abbcccxyzaaabbc'
 my_string.strip('abc')           # 'xyz'
 ```
 
-#### `str.rstrip('characters')`
+### `str.rstrip('characters')`
 Returns a copy of `str` with trailing whitespace (default) or chosen characters removed.<br><br>
 
-#### `str.lstrip('characters')`
+### `str.lstrip('characters')`
 Returns a copy of `str` with leading whitespace (default) or chosen characters removed.<br><br>
 
-#### `str.replace('old', 'new')`
+### `str.replace('old', 'new')`
 Returns a copy of `str` with the first argument replaced by the second argument.
 ```Python
 my_string = 'cat'
 my_string.replace('c', 'h')    # 'hat'
 ```
 
-#### `str.split('character')`
+### `str.split('character')`
 Returns a list of the words in `str`, using spaces as an indicator of a new word, or a given character.
 ```Python
 my_string = 'I love you'
@@ -163,13 +163,13 @@ my_next_string = 'I + love + you'
 print(my_next_string.split('+'))    # ['I ', ' love ', ' you']
 ```
 
-#### `str.find('string')`
+### `str.find('string')`
 Returns the first index at which the given substring is found within `str`, searching from left to right.<br><br>
 
-#### `str.rfind('string')`
+### `str.rfind('string')`
 Returns the first index at which the given substring is found within `str`, searching from right to left. *Note:* This method returns the left-to-right index of `str`, even though it searches for the given input from right to left.<br><br>
 
-#### boolean vs. truthiness<br>`TRY AGAIN`
+## boolean vs. truthiness
 Booleans are immutable, primitive objects representing binary states. There are two boolean values: `True` and `False`. They often appear as the return value of methods or logical / comparison operations. In mathematical expressions, `True` evaluates to `1` and `False` evaluates to `0`.
 
 Truthiness is a way of describing how a value behaves in a Boolean context. When an object contains a non-zero or non-empty value, we say that that value "is truthy" or "evaluates to true". When the object contains a zero, empty, or `None` value, we say that that value "is falsy" or "evaluates to false". Examples of falsy values include:
@@ -179,10 +179,10 @@ Truthiness is a way of describing how a value behaves in a Boolean context. When
 * any custom data types defined as falsy<br><br>
 
 
-#### `None`<br>`ALMOST THERE`
+## `None`
 `None` is an immutable data type used to describe an object with an absent value. The default return value for custom functions, as well as many methods that mutate mutable objects is `None`. Launch School is inconclusive about whether `None` is a primitive or non-primitive data type.<br><br>
 
-#### ranges<br>`CONFIDENT`
+## ranges
 Ranges are immutable, non-primitive sequences that increment integer values from one endpoint to another. Ranges are "lazy sequences" meaning that they do not create element values until they are called, usually by iterating them in a `for` loop or coercing them into another data type,. Their syntax is `range(inclusive_starting_integer, exclusive_ending_integer, step_size)`. Make a decending range by inputing a negative step size and a startpoint greater than the endpoint. If the step size is negative and the startpoint is less than the endpoint, or if the startpoint is equal to the endpoint no matter the step size, Python will return an empty range.
 ```Python
 print(range(2, 25, 4))            # range(2, 25, 4)
@@ -195,7 +195,7 @@ print(range(10, 10, -1))          # range(10, 10, -1)
 print(list(range(10, 10, -1)))    # []
 ```
 
-#### list and dictionary syntax<br>`CONDFIDENT`
+## list and dictionary syntax
 Lists are mutable, non-primitive sequnces defined by square brackets `[]`. Their elements are comma-delimited, ordered, and heterogenous (i.e. any list element can be of any data type). One may retrieve and reasign elements from a list by indexing:
 
 ```Python
@@ -226,12 +226,12 @@ print(my_dict)
 # }
 ```
 
-### list methods<br>`MOSTLY THERE`
+## list methods
 
-#### `len(list)`
+### `len(list)`
 Returns an integer whose value is the number of elements in `list`.
 
-#### `list.append(element_to_add)`
+### `list.append(element_to_add)`
 Mutates `list` by adding `element_to_add` to the end of `list`; returns `None`.
 
 ```Python
@@ -242,7 +242,7 @@ print(append_return_value)    # None
 print(my_list)                # [1, 2, 3, 4]
 ```
 
-#### `list.pop(index_to_remove)`
+### `list.pop(index_to_remove)`
 Mutates `list` by removing the element at index `index_to_remove`; returns the popped element. If no element is given, removes the last element.
 
 ```python
@@ -256,7 +256,7 @@ print(my_list.pop(0))      # a
 print(my_list)             # ['b', 'c']
 ```
 
-#### `list.reverse()`
+### `list.reverse()`
 Mutates `list` by reversing the order of all elements; returns `None`.
 
 ```python
@@ -267,18 +267,18 @@ print(reverse_return_value)    # None
 print(my_list)                 # [5, 4, 3, 2, 1]
 ```
 
-### dictionary methods<br>`CONDFIDENT`
+## dictionary methods
 
-#### `dict.keys()`
+### `dict.keys()`
 Returns a view object of the keys in `dict`; this object is tied to the keys in the dictionary it references and will reflect any mutations to those keys.
 
-#### `dict.values()`
+### `dict.values()`
 Returns a view object of the values in `dict`; this object is tied to the values in the dictionary it references and will reflect any mutations to those values.
 
-#### `dict.items()`
+### `dict.items()`
 Returns a view object of the `(key, value)` tuples in `dict`; this object is tied to the `(key, value)` tuples in the dictionary it references and will reflect any mutations to those elements.
 
-#### `dict.get('desired_key', 'alternative_output')`
+### `dict.get('desired_key', 'alternative_output')`
 Returns the value in `dict` associated with the `desired_key`, or if the `desired_key` is not present, returns the `alternative_output`.
 
 ```python
@@ -297,7 +297,7 @@ get_return_value = my_dict.get(get, f'No element {get}.')
 print(get_return_value)    # No element False.
 ```
 
-### slicing (strings, lists, tuples)<br>`MOSTLY THERE`
+## slicing (strings, lists, tuples)
 Slicing returns a portion of a given object as a new object. It uses the syntax `my_object[inclusive_start_index, exclusive_stop_index, step_size]`. One creates a reversed copy of a list by calling `my_object[::-1]`.
 
 ```python
@@ -308,9 +308,9 @@ print(slicing_return_value)    # (4, 3, 2, 1)
 print(my_tuple)                # (1, 2, 3, 4)
 ```
 
-### operators<br>`CONDFIDENT`
+## operators
 
-#### arithmetic: `+`, `-`, `*`, `/`, `//`, `%`, `**`
+### arithmetic: `+`, `-`, `*`, `/`, `//`, `%`, `**`
 Arithmetic operators perform mathematical functions on Python's numeric values. Specifically... 
 * Division (`/`) performs float division; the result is always a float regardless of the operand data types. 
 * Integer division (`//`) returns the largest whole number less than or equal to the floating point result; the resulting data type depends on those of the operands. 
@@ -318,7 +318,7 @@ Arithmetic operators perform mathematical functions on Python's numeric values. 
 * Exponentiation (`**`) performs an operation of the first operand raised to the power of the second operand; the resulting data type depends on those of the operands.
 
 
-#### string operators: `+`
+### string operators: `+`
 Strings may be concatenated using the `+` operator. This always returns a new objects, because strings cannot be mutated.
 
 ```python
@@ -327,7 +327,7 @@ string2 = " so much!"
 print(string1 + string2)    # I love you so much!
 ```
 
-#### list operators: `+`
+### list operators: `+`
 List may be concatenated using the `+` operator. This may mutate a list if executed with augmented assignment, or create a new list if executed without augmented assignment.
 
 ```python
@@ -352,7 +352,7 @@ print(list1)        # ['I', 'love', 'you', 4, 'ever', 4, 'ever']
 print(id(list1))    # 4636805248
 ```
 
-#### comparison: `==`, `!=`, `<`, `>`, `<=`, `>=`
+### comparison: `==`, `!=`, `<`, `>`, `<=`, `>=`
 Comparison operations return a Boolean value that evaluates whether the comparison between their operands is `True` or `False`. The equality operator `==` evaluates the equality of element values, not the identities of objects in memory. It returns `True` if its operands have equal values and `False` if its operands have unequal values.
 
 ```python
@@ -378,7 +378,7 @@ print(low3 == low4, high3 == high4)    # True True
 print(low3 is low4, high3 is high4)    # False False
 ```
 
-#### logical: `and`, `or`, `not`
+### logical: `and`, `or`, `not`
 Logical operators evaluate the truthiness of their operands and return either the last evaluated element (`and`, `or`) or a Boolean value (`not`).
 
 ```python
@@ -388,7 +388,7 @@ print(not "")               # True
 print(not "I love you!")    # False
 ```
 
-#### identity: `is`, `is not`
+### identity: `is`, `is not`
 
 The identity operator evaluates an object's location in memory, not its value. `is` returns `True` if two objects point to the same location in memory and `False` if two objects point to different memory location. The operator `is not` returns the opposite Boolean value of `is`. Use the function `id()` to evaluate an object's location in memory, represented as an integer. When objects share the same location in memory, this is known as aliasing.
 
@@ -424,7 +424,7 @@ print(id(e) == id(f))    # True
 ```
 
 
-#### operator precedence<br>
+### operator precedence<br>
 
 Operators with higher precedence are evaluated before operatorss with lower precedence. Operands "bind more tightly" to operators of higher precedence, meaning operands belonging to two operators will evaluate within the context of the higher-precedence operator first.
 
@@ -482,7 +482,7 @@ Just for fun, here is operator precedence for all Python actions...
 | 17 | `lambda` | Lambda expression |
 | 18 | `:=` | Assignment expression |
 
-### mutability and immutability
+## mutability and immutability
 Mutability refers to the abilty to mutate an object in memory once it has been initialized. Mutable objects can be changed "in-place", or at their location in memory, after they have been initialized. Mutable objects include lists, dictionaries, sets, and functions. Immutable objects cannot be changed in-place once they have been initialized. Immutable objects include integers, floats, strings, Booleans, ranges, tuples, frozensets, and `None`.
 
 
@@ -506,13 +506,13 @@ print(my_int)         # 8
 print(id(my_int))     # 4315406720
 ```
 
-### variables
+## variables
 Variables are names that we give to objects in memory.
 
-#### naming conventions
+### naming conventions
 Variables are named with `snake_case` using all lowercase letters and underscores between words. One can include digits within a variable name, but they may not start with a digit.
 
-#### initialization, assignment, and reassignment 
+### initialization, assignment, and reassignment 
 Variables are intialized and assigned by setting a variable name equal to a value. Reassign a variable by setting a variable name that has already been used equal to another value. Variable reassignment (without augmented assignment) almost always creates a new object in memory, even if the object being reassigned is mutable.
 
 ```python
@@ -545,10 +545,10 @@ my_var = "Hello, world!"
 print(id(my_var))        # 44422021936
 ```
 
-#### scope
+### scope
 Variable scope describes where in code a variable can be accessed by name. A particular variable's scope depends on where it was initialized. Variables initialized within an outer scope are accessible within all its nested inner scopes; therefore, variables initialized within the global scope are accessible everywhere in a program. However, variables initialized in an inner scope are not accessible to their outer scopes unless initialized using the `global` or `nonlocal` keywords.
 
-#### `global` keyword 
+### `global` keyword 
 The `global` keyword alerts Python to local for a variable name in the global scope, or if a name is yet unused, to add the name to the global scope. We use the `global` keyword within functions to avoid variable shadowing or to initialize variables within functions that we want to access in the global scope
 
 ```python
@@ -574,7 +574,7 @@ initialize_greeting()
 print(greeting)    # "Ahoy!"
 ```
 
-#### variables as pointers 
+### variables as pointers 
 Variables are described as "pointers" because they reference or "point to" a location in memory or "address space" that contains the object assigned to the value. One can also describe variables as "references", which is used interchangably with "poiners". Let's see an example...
 
 ```python
@@ -595,7 +595,7 @@ print(my_list)
 # that element because strings are immutable)
 ```
 
-#### variable shadowing
+### variable shadowing
 Variable shadowing occurs when a variable within an outer scope shares a name with a variable within it's inner scope. When this variable is invoked in the inner scope, it points to the object it was assigned in the inner scope, rather than in the outer scope, and "shadows" the object it was assigned in the outer scope. For example...
 
 ```python
@@ -611,16 +611,16 @@ print(greeting)    # "Hello"
 
 The effect of variable shadowing in this example is that, even though the global variable `greeting` continually points to the string object `"Hello"`, it is shadowed by the local variable `greeting` within the function `say_hi`. Therefore, when we invoke `say_hi`, the output is `"Hi, Leah!"`. <br><br>
 
-### conditionals and loops
+## conditionals and loops
 Conditionals take part in the control flow of a program. They use a combination of `if`, `elif`, and `else` statements along with comparison, logical, and membership operators (`==`, `!=`, `<`, `<=`, `>`, `>=`, `in`, `not in`, `is`, `is not`, `and`, `or`, `not`) in order to direct Python to certain operations under certain conditions. Loops are an efficient way to iterate over a sequence of objects, or continuously while a condition is met, and perform an operation at each iteration. There are two types of loops: `for` and `while`.
 
-#### `for` 
+### `for` 
 A `for` loop iterates over a sequence, such as a range, and performs a task during each iteration. The `for` loop ends when it has iterated over all the items in the sequence and performed the respective tasks.
 
-#### `while`
+### `while`
 A `while` loop evaluates a conditional statement and performs its tasks as long as the statement evaluates to `True`. The `while` loop ends when the condition is no longer met.<br><br>
 
-### `print()` and `input()`
+## `print()` and `input()`
 The built-in functions `print()` and `input()` either output data to the console or input data from the console. They involve implicit coersion, as `print()` coerces all data types to strings before outputing them to the console, and `input()` coerces all data types to strings before assigning them to a variable within a function.
 ```python
 def say_hi():
@@ -637,7 +637,7 @@ say_hi()    # Hi, Leah! Welcome to 30!
 ```
 
 
-### exceptions (when they will occur and how to handle them)
+## exceptions (when they will occur and how to handle them)
 Exceptions occur when there is code that Python cannot interpret. The seven types of excepions discussed in Launch School are `ZeroDivisionError`, `KeyError`, `IndexError`, `NameError`, `TypeError`, `ValueError`, and `SyntaxError`. Exception handling can be broken down into four steps:
 
 1. **Try:** This block contains the code that might raise an exception.
@@ -683,10 +683,10 @@ print(invalid_number([10]))
 
 ```
 
-### functions:
+## functions:
 Functions create reusable pieces of code that can be invoked with at each instance of execution.
 
-#### definitions and calls 
+### definitions and calls 
 Functions are defined using the `def` keyword followed the function name in `snake_case`, parentheses, and a colon. Their parameters are declared within the parenteses following the function name. Functions are called using the function name and any input arguments, if the function excepts them.
 
 ```python
@@ -698,10 +698,10 @@ def say_hi(name):
 say_hi('Leah')    # Hi, Leah!!!
 ```
 
-#### return values
+### return values
 Functions pass return values to their caller eitherwhen they reach the end of their body, or when they encounter the `return` keyword. This return statement immediately exits the function and outputs a return value. It may be an explicit return value, specified directly after the `return` keyword, or an implicit return value (`None`) if none is specified. It's important to remember that all functions return something unless they raise an exception; if no return value is specified, the function returns `None`.
 
-#### parameters vs. arguments 
+### parameters vs. arguments 
 Parameters are declared within the function definition; they are placeholders for potential arguments passed into a function when it is invoked. Arguments are the actual values that get passed in during the function invocation.
 
 ```python
@@ -715,10 +715,10 @@ def say_hi(name):
 say_hi('Leah')    # Hi, Leah!!!
 ```
 
-#### nested functions
+### nested functions
 When a function is defined within another function, it is known as a nested function. Variable scoping rules day that variables initialized within an outer function can be accessed in their nested functions, but variables initialized within a nested function cannot be accessed by their enclosing functions. Nested functions can shadow variables within their enclosing functions as well.
 
-#### output vs. return values, side effects 
+### output vs. return values, side effects 
 Function outputs are anything that is displayed to the console during the function's execution. For example, if anything is printed within a function body, the printed message is considered an output. Return values, however, are specifically the values within the function's return statement; they are returned to the caller, not displayed in the console. Side effects are any outputs or actions that are not returned in the return statement. Function are said to have side effects if they...
 
 * reassign any non-local variables.
@@ -728,7 +728,7 @@ Function outputs are anything that is displayed to the console during the functi
 * call other functions that have side effects.
 
 
-### expressions and statements
+## expressions and statements
 Expressions are parts of code that are evaluated to produce a new object. Remember that expressions prouce a value that can then be assigned to a variable, passed to a function / method, or returned by a function / method. Examples of expressions include...
 
 * literals: `0`, `1.234`, `Leah`, `True`, `None`
