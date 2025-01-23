@@ -1,6 +1,6 @@
 # Python SPOT Wiki
 
-## Type coercions: explicit (e.g., using int(), str()) and implicit)
+## Type coercions: explicit (e.g., using int(), str() and implicit)
 
 ### 1: Which variable is coerced? Is it implicit or explicit coercion?
 
@@ -125,11 +125,13 @@ print(123112940)
 ```python
 str1 = "Hello, world!"
 sub1 = str1[8:12]
-print(sub1)
-		sub2 = str1[::-1]
-		print(sub2)
-		sub3 = str1[::2]
-print(sub3)
+print(sub1) # ?
+
+sub2 = str1[::-1]
+print(sub2) # ?
+
+sub3 = str1[::2]
+print(sub3) # ?
 ```
 
 > (The concept is string slicing, which creates a new string object, a substring,  from the original string object based on the indexing sequence given and the step slice argument if any.  sub1 is returning the characters from and inclusive of index 8 to but exclusive of index 12, or the string world, which is then printed. The substring sub2 returns the entire string, but the slice step argument of -1 reverses the order of the indexing returning the string reversed, or !dlrow, olleH, which is then printed. The last substring returns the entire original string, but the slice step argument of 2 instructs the indexing to skip every other index starting with 1. The new substring has a value of Hlo ol! which is printed.)
@@ -154,7 +156,10 @@ print(name[0])
 ## f-strings
 
 ### Basic Questions:
-- What are f-strings? (string prefix for defining formatted string literals that enables string interpolation)
+- What are f-strings? 
+
+> (string prefix for defining formatted string literals that enables string interpolation)
+
 
 ### 1. What does this print and why, what is the concept?
 

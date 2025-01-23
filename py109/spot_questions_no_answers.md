@@ -1,6 +1,6 @@
 # Python SPOT Wiki
 
-## Type coercions: explicit (e.g., using int(), str()) and implicit)
+## Type coercions: explicit (e.g., using int(), str() and implicit)
 
 ### 1: Which variable is coerced? Is it implicit or explicit coercion?
 
@@ -8,6 +8,7 @@
 x = 3.5
 y = 5
 z = x + y
+print(z) # ?
 ```
 
 ### 2: What coercion is happening here? Is it implicit or explicit?
@@ -15,7 +16,7 @@ z = x + y
 ```python
 a = 1
 b = 2
-print(a + b)
+print(a + b) # ?
 ```
 
 ### 3: What coercion is happening here? Is it implicit or explicit?
@@ -42,11 +43,10 @@ def convert_to_int(string):
         converted_integer = int(string)
         return converted_integer
     except ValueError:
-        return "That string cannot be converted to an integer"
+        return "That string cannot be converted to an integer."
 
-print(convert_to_int("hello"))
-
-print(convert_to_int("5"))
+print(convert_to_int("hello")) # ?
+print(convert_to_int("5")) # ?
 ```
 
 ### 2: What does this return and why? What concept does this cover?
@@ -60,9 +60,9 @@ def division(number1, number2):
         result = numerator / denominator
         return result
     except ZeroDivisionError:
-        return "The denominator cannot be zero"
+        return "The denominator cannot be zero."
 
-print(division(5, 0))
+print(division(5, 0)) # ?
 ```
 
 ### 3: What does this print and why, what concept does this demonstrate?
@@ -105,37 +105,40 @@ print(123112940)
 
 ```python
 str1 = "Hello, world!"
+
 sub1 = str1[8:12]
-print(sub1)
-		sub2 = str1[::-1]
-		print(sub2)
-		sub3 = str1[::2]
-print(sub3)
+print(sub1) # ?
+
+sub2 = str1[::-1]
+print(sub2) # ?
+
+sub3 = str1[::2]
+print(sub3) # ?
 ```
 
 ### 2. What does this print and why? What concept is this?
 
 ```python
-print(“Hello\nWorld”)
+print("Hello\nWorld")
 ```
 
 ### 3. What does this print and why? What concept is this?
 
 ```python
-name = ‘Alexander Graham Bell’
+name = 'Alexander Graham Bell'
 print(name[0])
 ```
 
 ## f-strings
 
 ### Basic Questions:
-- What are f-strings? (string prefix for defining formatted string literals that enables string interpolation)
+- What are f-strings?
 
 ### 1. What does this print and why, what is the concept?
 
 ```python
 name = ‘Abraham Lincoln’
-print(f’”{name} was a President of the US”)
+print(f"{name} was a President of the US.")
 ```
 
 ## string methods
