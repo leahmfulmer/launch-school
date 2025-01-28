@@ -149,7 +149,7 @@ print(f"{name} was a President of the US.")
 ### 1. What does this print and why?
 
 ```python
-mashup = “thIs is How we type careLEssly”
+mashup = "thIs is How we type careLEssly"
 cleaned = mashup.capitalize()
 print(cleaned)
 ```
@@ -542,7 +542,7 @@ for key in keys:
 my_dict = {'a': 1, 'b': 2, 'c': 3}
 values = my_dict.values()
 print(values)
-		for value in values:
+for value in values:
     print(value)
 ```
 
@@ -553,7 +553,7 @@ my_dict = {'a': 1, 'b': 2, 'c': 3}
 items = my_dict.items()
 print(items)
 for key, value in items:
-    print( key, value)
+    print(key, value)
 ```
 
 ## variable scope, global keyword, variables as pointers, variable shadowing
