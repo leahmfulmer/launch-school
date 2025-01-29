@@ -729,7 +729,7 @@ Function outputs are anything that is displayed to the console during the functi
 
 
 ## expressions and statements
-Expressions are parts of code that are evaluated to produce a new object. Remember that expressions prouce a value that can then be assigned to a variable, passed to a function / method, or returned by a function / method. Examples of expressions include...
+Expressions are parts of code that are evaluated to produce a new object. Remember that expressions produce a value that can then be assigned to a variable, passed to a function / method, or returned by a function / method. Examples of expressions include...
 
 * literals: `0`, `1.234`, `Leah`, `True`, `None`
 * variable references: `foo` or `name` when these variables have already been defined
