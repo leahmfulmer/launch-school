@@ -69,6 +69,29 @@ The primary data structures at play here are lists and strings. Both input and o
 
 ## <span style="color:yellow">A</span>lgorithm
 
+This was my first attempt...
+
+1. Initialize a helper function `is_vowel` which takes an input string `letter` as its parameter and returns a boolean object that describes whether or not that letter is a vowel.
+
+2. Initialize a function `sort_by_consonant_count` which takes a list `my_list` as a parameter. 
+
+3. Initiate the empty dictionary `consonant_count`. 
+
+4. Begin a `for` loop which iterates over each string in the input list. Initialize the variable `count` and set it equal to 0.
+
+5. Begin a nested `for` loop which iterates over each letter and invoke the helper function `is_vowel` to evaluate if the current letter is a vowel. If the current letter is not a vowel, increment `count` by 1. If the current letter is a vowel, set `count` back to 0. Before completing the iteration, add an element to `consonant_count` with the current word as its key and the integer object referenced by the variable `count` as its value.
+
+6. Iterate over all strings in the given list and return the keys of the dictionary `consonant_count` in order of most adjacent consonants to least.
+
+However, this is far too detailed. This is what was suggested by Launch School...
+
+1. For each string in the input list, determine the highest number of adjacent consonants within that string.
+
+2. Sort the input list (in descending order) based on on the number of consonants in each string.
+
+3. Return the sorted list.
+
+*Notice:* This version does not contain any variable names. This does not even remotely describe code with precision. This is what they mean by *high-level*. What are the very basic steps of what this algorithm has to *do*?
 
 
 ## Implement a Solution in <span style="color:yellow">C</span>ode
