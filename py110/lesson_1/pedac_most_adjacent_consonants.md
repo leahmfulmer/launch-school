@@ -91,7 +91,15 @@ However, this is far too detailed. This is what was suggested by Launch School..
 
 3. Return the sorted list.
 
-*Notice:* This version does not contain any variable names. This does not even remotely describe code with precision. This is what they mean by *high-level*. What are the very basic steps of what this algorithm has to *do*?
+*Notice:* This version does not contain any variable names. This does not even remotely describe code with precision. This is what they mean by **high-level**. What are the very basic steps of what this algorithm is supposed to **do**? Let's try it again...
+
+1. Iterate over a given list of strings, determining how many adjacent consonants exist in each string.
+
+2. Sort the strings from highest number of adjacent consonants to lowest, maintaining the order of words with the same number of adjacent consonants.
+
+3. Return the sorted list to the outer scope.
+
+The first step here is 
 
 
 ## Implement a Solution in <span style="color:yellow">C</span>ode
