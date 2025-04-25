@@ -99,7 +99,7 @@ However, this is far too detailed. This is what was suggested by Launch School..
 
 3. Return the sorted list to the outer scope.
 
-The first step here is 
+The first step here is quite involved; therefore, one could expand this step into its own algorithm. This is essentially what I did in my first pass. Since I've already outlined this sub-algorithm, I believe it is time to implement a solution in code.
 
 
 ## Implement a Solution in <span style="color:yellow">C</span>ode
