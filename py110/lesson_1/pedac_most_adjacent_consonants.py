@@ -2,31 +2,63 @@
 
 #### a. Initialize a helper function `is_vowel` which takes an input string `letter` as its parameter and returns a boolean object that describes whether or not that letter is a vowel.
 
-def is_vowel(letter):
-    return (letter in ('a', 'e', 'i', 'o', 'u'))
+def is_consonant(letter):
+    return (letter not in ('a', 'e', 'i', 'o', 'u'))
 
 #### b. Initialize a function `sort_by_consonant_count` which takes a list `my_list` as a parameter.
 
 def sort_by_consonant_count(my_list):
-
-#### c. Initiate the empty dictionary `consonant_count`.
     consonant_count = {}
 
-#### d. Begin a `for` loop which iterates over each string in the input list. Initialize the variable `count` and set it equal to 0.
-    for string in my_list:
+    for i, string in enumerate(my_list):
+        string = string.replace(' ', '')
         count = 0
-
-#### e. Begin a nested `for` loop which iterates over each letter and invoke the helper function `is_vowel` to evaluate if the current letter is a vowel. If the current letter is not a vowel, increment `count` by 1. If the current letter is a vowel, set `count` back to 0. Before completing the iteration, add an element to `consonant_count` with the current word as its key and the integer object referenced by the variable `count` as its value. NOTE: Implement a comparison where the largest value of `count` is retained.
-        for letter in string:
-            if is_vowel(letter):
-                count = 0
-            else:
+ 
+        for j, letter in enumerate(string[:-1]):
+            if is_consonant(string[j]) and is_consonant(string[j+1]):
                 count += 1
+            else:
+                pass
+
+            
+        #     elif is_vowel(letter):
+        #         count = 'vowel'
+        #     el
+        #         count = 'hello'
 
             consonant_count[string] = count
 
 # 2. Sort the input list (in descending order) based on on the number of consonants in each string.
+    print(consonant_count)
+    dict(sorted(consonant_count.items(), key=lambda item: item[1]))
 
 # 3. Return the sorted list.
+    return list(consonant_count.keys())
 
 #### a. Iterate over all strings in the given list and return the keys of the dictionary `consonant_count` in order of most adjacent consonants to least.
+
+
+# Example 1
+my_list = ['aa', 'baa', 'ccaa', 'dddaa'] 
+print(sort_by_consonant_count(my_list)) 
+# ['dddaa', 'ccaa', 'aa', 'baa']
+
+# Example 2
+my_list = ['can can', 'toucan', 'batman', 'salt pan'] 
+print(sort_by_consonant_count(my_list))
+# ['salt pan', 'can can', 'batman', 'toucan']
+
+# Example 3
+my_list = ['bar', 'car', 'far', 'jar'] 
+print(sort_by_consonant_count(my_list)) 
+# ['bar', 'car', 'far', 'jar']
+
+# Example 4
+my_list = ['day', 'week', 'month', 'year'] 
+print(sort_by_consonant_count(my_list))
+# ['month', 'day', 'week', 'year']
+
+# Example 5
+my_list = ['xxxa', 'xxxx', 'xxxb'] 
+print(sort_by_consonant_count(my_list)) 
+# ['xxxx', 'xxxb', 'xxxa']
