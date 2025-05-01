@@ -20,20 +20,13 @@ def sort_by_consonant_count(my_list):
             else:
                 pass
 
-            
-        #     elif is_vowel(letter):
-        #         count = 'vowel'
-        #     el
-        #         count = 'hello'
-
             consonant_count[string] = count
 
 # 2. Sort the input list (in descending order) based on on the number of consonants in each string.
-    print(consonant_count)
-    dict(sorted(consonant_count.items(), key=lambda item: item[1]))
+    sorted_dict = dict(sorted(consonant_count.items(), reverse=True, key=lambda item: item[1]))
 
 # 3. Return the sorted list.
-    return list(consonant_count.keys())
+    return list(sorted_dict.keys())
 
 #### a. Iterate over all strings in the given list and return the keys of the dictionary `consonant_count` in order of most adjacent consonants to least.
 
